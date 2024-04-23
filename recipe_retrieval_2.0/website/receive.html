@@ -1,0 +1,119 @@
+<!-- simplified front-end code for receiving input and displaying results -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Recipe Generator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background-image: url('plot/bg.png'); 
+        /* background-repeat: no-repeat;  */
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: contain;
+    }
+    body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.8); 
+    z-index: -1;
+    }
+    input[type="text"] {
+        width: 300px; /* Increased width of the text input */
+    }
+    .input-group {
+        margin-bottom: 30px; /* Increased bottom margin for more spacing */
+    }
+    #recipeOutput {
+        margin-top: 20px;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 40px; /* Margin below the title */
+    }
+</style>
+</head>
+<body>
+    <h1>Recipe Generator</h1>
+
+    <div class="input-group">
+        <input type="text" id="includeIngredients" placeholder="Ingredients that you have separated by commas">
+        <input type="text" id="excludeIngredients" placeholder="Ingredients that you don't like, separated by commas">
+        <button onclick="submitIngredients()">Submit Ingredients</button>
+    </div>
+
+    <!-- <div class="input-group">
+        <input type="text" id="textInput" placeholder="Ingredients separated by commas">
+        <button onclick="submitText()">Submit Ingredients</button>
+    </div> -->
+
+    <input type="text" id="speechToText" placeholder="Input text by voice">
+    <button id="start-btn">Start voice input</button>
+
+    <script>
+    // 检查浏览器是否支持Web Speech API
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+        console.log('Your Browser supports speech Recognition');
+
+        var recognition = new SpeechRecognition();
+        var textBox = document.getElementById('speechToText');
+        var startButton = document.getElementById('start-btn');
+
+        // 点击按钮开始语音识别
+        startButton.addEventListener('click', function() {
+        recognition.start();
+        });
+
+        // 识别结果事件
+        recognition.addEventListener('result', function(event) {
+        var text = event.results[0][0].transcript;
+        textBox.value = text;
+        // 发送文本到服务器
+        fetch('/submit_voice', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({text: text})
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+        // 识别结束后重新开始（可选）
+        recognition.addEventListener('end', function() {
+        recognition.start();
+        });
+
+    } else {
+        console.log('Your Browser does not support Speech Recognition');
+    }
+    </script>
+<!-- 
+    <div class="input-group">
+        <input type="file" id="imageInput" accept="image/*">
+        <button onclick="submitFile()">Upload File</button>
+    </div> -->
+    
+    <div id="recipeOutput">
+        <!-- Recipe output will be displayed here -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
