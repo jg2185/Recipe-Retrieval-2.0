@@ -6,18 +6,19 @@
 <title>Recipe Generator</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        background-image: url('plot/bg.png'); 
-        /* background-repeat: no-repeat;  */
-        background-attachment: fixed;
-        background-position: center center;
-        background-size: contain;
-    }
-    body::before {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This will center the children elements */
+    justify-content: start; /* This will align the children to the start of the main axis */
+    background-image: url('plot/bg.png');
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: contain;
+}
+
+body::before {
     content: '';
     position: absolute;
     top: 0;
@@ -26,39 +27,64 @@
     left: 0;
     background: rgba(255, 255, 255, 0.8); 
     z-index: -1;
-    }
-    input[type="text"] {
-        width: 300px; /* Increased width of the text input */
-    }
-    .input-group {
-        margin-bottom: 30px; /* Increased bottom margin for more spacing */
-    }
-    #recipeOutput {
-        margin-top: 20px;
-    }
-    h1 {
-        text-align: center;
-        margin-bottom: 40px; /* Margin below the title */
-    }
+}
+
+.input-group, #speechToText {
+    width: 300px; /* Make these elements take the full width */
+    box-sizing: border-box; /* Make sure padding and borders are included in the width */
+    margin-bottom: 20px; /* Add some space between the elements */
+    text-align: center; /* Center text for inputs and buttons */
+}
+
+input[type="text"] {
+    width: 300px; /* Auto width based on content */
+    display: block; /* Make these elements block to take full width */
+    margin: 0 auto 10px; /* Centers the block elements horizontally and adds spacing */
+}
+
+button, #start-btn {
+    width: 100px; /* Auto width based on content */
+    display: block; /* Make these elements block to take full width */
+    margin: 0 auto 10px; /* Centers the block elements horizontally and adds spacing */
+}
+
+#recipeOutput {
+    width: 100%; /* Adjust as necessary for your layout */
+    display: block; /* Makes the div a block element */
+}
+
+h1 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
 </style>
 </head>
 <body>
     <h1>Recipe Generator</h1>
 
     <div class="input-group">
-        <input type="text" id="includeIngredients" placeholder="Ingredients that you have separated by commas">
-        <input type="text" id="excludeIngredients" placeholder="Ingredients that you don't like, separated by commas">
+        <div>
+            <input type="text" id="includeIngredients" placeholder="Ingredients that you have separated by commas" style="margin-bottom: 10px;">
+        </div>
+        <div>
+            <input type="text" id="excludeIngredients" placeholder="Ingredients that you don't like, separated by commas" style="margin-bottom: 10px;">
+        </div>
         <button onclick="submitIngredients()">Submit Ingredients</button>
     </div>
+    
+    
 
     <!-- <div class="input-group">
         <input type="text" id="textInput" placeholder="Ingredients separated by commas">
         <button onclick="submitText()">Submit Ingredients</button>
     </div> -->
 
-    <input type="text" id="speechToText" placeholder="Input text by voice">
-    <button id="start-btn">Start voice input</button>
-
+    <div class="centered-group">
+        <input type="text" id="speechToText" placeholder="click the button to start voice input" style="margin-bottom: 10px;">
+        <button id="start-btn">Start voice input</button>
+    </div>
+    
     <script>
     // 检查浏览器是否支持Web Speech API
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -105,11 +131,6 @@
         console.log('Your Browser does not support Speech Recognition');
     }
     </script>
-<!-- 
-    <div class="input-group">
-        <input type="file" id="imageInput" accept="image/*">
-        <button onclick="submitFile()">Upload File</button>
-    </div> -->
     
     <div id="recipeOutput">
         <!-- Recipe output will be displayed here -->
