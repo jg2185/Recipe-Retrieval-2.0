@@ -1,25 +1,25 @@
 // 这是前端的JavaScript，用于处理用户输入和与后端通信
 
-function submitText() {
-    // 获取文本输入并发送到后端
-    var ingredients = document.getElementById('textInput').value;
-    // 这里应发送请求到后端并处理响应
-    fetch('/generate_recipe', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ingredients: ingredients})
-    })
-    .then(response => response.json())
-    .then(data => {
-        // 用返回的数据做一些事情，比如显示生成的食谱
-        console.log(data);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
+// function submitText() {
+//     // 获取文本输入并发送到后端
+//     var ingredients = document.getElementById('textInput').value;
+//     // 这里应发送请求到后端并处理响应
+//     fetch('/generate_recipe', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ingredients: ingredients})
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         // 用返回的数据做一些事情，比如显示生成的食谱
+//         console.log(data);
+//     })
+//     .catch((error) => {
+//         console.error('Error:', error);
+//     });
+// }
 function submitIngredients() {
     var includeIngredients = document.getElementById('includeIngredients').value;
     var excludeIngredients = document.getElementById('excludeIngredients').value;
