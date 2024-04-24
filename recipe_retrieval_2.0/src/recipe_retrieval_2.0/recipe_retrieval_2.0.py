@@ -1,6 +1,16 @@
+########## IR adjustment 4/23 night
+########## goal is to add generative text model for recipe generation
+
 import json
 from nltk.stem import PorterStemmer
 from nltk import word_tokenize
+
+######### this is for the text generative model
+from transformers import pipeline
+
+# load the model
+generator = pipeline('text-generation', model='pratultandon/recipe-nlg-gpt2-train11_15')
+
 
 class RecipeSearcher:
     def __init__(self, index_filename):
@@ -15,7 +25,7 @@ class RecipeSearcher:
 
     def load_recipes(self):
         # load original recipes data
-        with open("../data/readable_recipes.txt", 'r') as file:
+        with open("readable_recipes.txt", 'r') as file:
             return json.load(file)
 
     def get_user_input(self):
@@ -50,6 +60,13 @@ class RecipeSearcher:
                 cleaned_items.append(item)
         return cleaned_items
 
+    def generate_recipe(self, prompt):
+        generator = pipeline('text-generation', model='pratultandon/recipe-nlg-gpt2-train11_15')
+        generated_recipes = generator(prompt, max_length=1000, truncation=True)  
+        # could adjust max_length if needed, I'll leave it as 1000
+        return generated_recipes[0]['generated_text']
+
+    
     ########### use a Python approach to detect and remove these duplications 
     # We'll divide the text into paragraphs or sections and then remove any duplicate sections. 
     # This process involves splitting the text based on paragraph breaks, identifying duplicates
@@ -80,7 +97,11 @@ class RecipeSearcher:
         sorted_recipe_ids = sorted(recipe_matches, key=recipe_matches.get, reverse=True)[:3]
 
         if not sorted_recipe_ids:
-            print("No recipes found with the given ingredients that avoid your dislikes, please go for a grocery shopping.")
+            print("No recipes found with the given ingredients that avoid your dislikes. Generating some suggestions for you:")
+            # generate a recipe prompt based on user ingredients
+            prompt = f"Recipe with ingredients: {', '.join(ingredients)}:"
+            generated_recipe = self.generate_recipe(prompt)
+            print(generated_recipe)
         else:
             for recipe_id in sorted_recipe_ids:
                 recipe = self.recipes[recipe_id]
@@ -95,7 +116,16 @@ class RecipeSearcher:
 #works great!                
 if __name__ == "__main__":
     #path for the saved inverted index
-    searcher = RecipeSearcher('../data/inverted_index.json')  
+    searcher = RecipeSearcher('./inverted_index.json')  
     ingredients = searcher.get_user_input()
     dislikes = searcher.get_user_dislikes()
     searcher.display_recipes(ingredients, dislikes)
+    
+######### for the demo, we want to use "dried bean curd"
+######### also for demo, to use the recipe generative model, some requirements:
+# 1. need tensorflow or torch installed
+############### pip install tensorflow
+############### pip install torch torchvision torchaudio
+# 2. only compatible with the tensorflow2.0 API, so need re-install tf-keras
+############### pip install tf-keras
+
