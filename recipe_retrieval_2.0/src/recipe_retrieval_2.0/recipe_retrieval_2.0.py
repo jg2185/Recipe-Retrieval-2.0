@@ -1,3 +1,4 @@
+
 from utils.recipe_searcher import RecipeSearcher
 import argparse
 
@@ -14,3 +15,4 @@ if __name__ == "__main__":
     ingredients = searcher.get_user_input()
     dislikes = searcher.get_user_dislikes()
     searcher.display_recipes(ingredients, dislikes)
+
