@@ -49,8 +49,33 @@ button, #start-btn {
 }
 
 #recipeOutput {
-    width: 100%; /* Adjust as necessary for your layout */
-    display: block; /* Makes the div a block element */
+    min-height: 400px; /* Adjust the value as needed */
+    border: 1px solid #cccccc; /* A light border to show the area */
+    width: 300px; /* Or any other width you prefer */
+    margin: 20px auto; /* Top and bottom margin with auto horizontally centers the div */
+    background-color: #f9f9f9; /* A light background color to indicate the area */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow to indicate depth */
+    padding: 20px; /* Add some padding inside */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+    display: block; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: start; /* Align the children to the start of the main axis */
+    align-items: center; /* Center-align children horizontally */
+    text-align: center; /* Center text for any content that will be added */
+}
+
+#recipeOutput h2 {
+    color: #575757; /* Title text color */
+    font-size: 1.4em; /* Title font size */
+    margin-top: 0;
+    padding-top: 0px; /* Space at the top inside the border */
+}
+#recipeOutput p {
+    color: #a3a3a3; /* Paragraph text color */
+    font-size: 0.82em; /* Paragraph font size */
+    margin-top: 0;
+    padding: 0px 5px; /* Padding inside the border */
+
 }
 
 h1 {
@@ -133,7 +158,11 @@ h1 {
     </script>
     
     <div id="recipeOutput">
-        <!-- Recipe output will be displayed here -->
+        <!-- Title for the recipe output area -->
+        <h2>Recipe Results</h2>
+        <!-- Placeholder text -->
+        <p>Results will appear here after submitting ingredients.</p>
+
     </div>
     <script src="script.js"></script>
 </body>
