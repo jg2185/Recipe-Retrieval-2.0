@@ -1,26 +1,24 @@
-from flask import Flask, request, jsonify
 import text_processing
 import speech_processing
 
-app = Flask(__name__)
-
-@app.route('/process_text', methods=['POST'])
-def process_text_input():
-    data = request.json
-    text_input = data.get('text_input', '')
-    ingredients_text = text_processing.process_text(text_input)
-    print("Extracted ingredients from text:", ingredients_text)
-    return jsonify(ingredients_text)
-
-@app.route('/process_audio', methods=['POST'])
-def process_audio_input():
-    data = request.json
-    audio_file = data.get('audio_file', '')
-    transcript = speech_processing.speech_to_text(audio_file)
-    print("Transcribed text from audio:", transcript)
-    ingredients_audio = text_processing.process_text(transcript)
-    print("Extracted ingredients from audio:", ingredients_audio)
-    return jsonify(ingredients_audio)
+def main():
+    # Ask the user for input type
+    input_type = input("Enter 'text' for text input or 'audio' for audio file: 我想吃葡萄和酸奶，我不想吃红薯和玉米").strip().lower()
+    
+    if input_type == 'text':
+        text_input = "Hello, please tell me what ingredients you like and dislike."
+        ingredients_text = text_processing.process_text(text_input)
+        print("Extracted ingredients from text:", ingredients_text)
+    
+    elif input_type == 'audio':
+        audio_file = 'path_to_your_audio_file.wav'  # Ensure this path is correct
+        transcript = speech_processing.speech_to_text(audio_file)
+        print("Transcribed text from audio:", transcript)
+        ingredients_audio = text_processing.process_text(transcript)
+        print("Extracted ingredients from audio:", ingredients_audio)
+    
+    else:
+        print("Invalid input. Please enter 'text' or 'audio'.")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    main()
