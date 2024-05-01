@@ -2,12 +2,14 @@ from langdetect import detect
 from transformers import MarianMTModel, MarianTokenizer
 import spacy
 import re
+from functools import lru_cache
 
 class TextProcessor:
     def __init__(self):
-        # Load the English NLP model
+        """Load the English NLP model"""
         self.nlp = spacy.load("en_core_web_sm")
 
+    @lru_cache(maxsize=100)
     def translate_text(self, text, target_lang='en'):
         """Translates text to English using Helsinki NLP models from detected language."""
         detected_lang = detect(text)
@@ -26,23 +28,20 @@ class TextProcessor:
         doc = self.nlp(text)
         wants = []
         dont_wants = []
-        want_patterns = r"\b(want|include|desire|would like)\b([^.,;]+)"
-        dont_want_patterns = r"\b(don't want|exclude|without)\b([^.,;]+)"
-        
+        want_patterns = r"\b(want|include|desire|would like)\b(.+?);"
+        dont_want_patterns = r"\b(don't want|exclude|without)\b(.+?);"
         for match in re.finditer(want_patterns, text, re.IGNORECASE):
             phrase = match.group(2).strip()
             sub_doc = self.nlp(phrase)
             for ent in sub_doc.ents:
                 if ent.label_ == "FOOD":
                     wants.append(ent.text)
-
         for match in re.finditer(dont_want_patterns, text, re.IGNORECASE):
             phrase = match.group(2).strip()
             sub_doc = self.nlp(phrase)
             for ent in sub_doc.ents:
                 if ent.label_ == "FOOD":
                     dont_wants.append(ent.text)
-
         return wants, dont_wants
 
     def process_text(self, text):
