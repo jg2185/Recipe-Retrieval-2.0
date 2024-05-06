@@ -16,8 +16,9 @@ if __name__ == "__main__":
     dislikes = searcher.get_user_dislikes()
     searcher.display_recipes(ingredients, dislikes)
 
-####### in src dictionary
+####### in src directory
 
+####### activate your environment
 ####### pip install tensorflow
 ####### pip install torch torchvision torchaudio
 ####### pip install tf-keras
