@@ -1,0 +1,5 @@
+{
+    "salt": ["recipe1", "recipe5"],
+    "pepper": ["recipe2", "recipe5"],
+    "olive oil": ["recipe1", "recipe3", "recipe4"]
+}
