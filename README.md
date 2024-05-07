@@ -7,6 +7,9 @@ IR recipe retrieval from ingredients
 ```bash
 $ pip install recipe_retrieval_2.0
 ```
+## Contributor
+
+`recipe_retrieval_2.0` was created by Jess Godes, Linda Ding, Yi Luo, Chuyun Kuang.
 
 ## Usage
 
