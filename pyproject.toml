@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "recipe_retrieval_2.0"
+name = "Recipe-Retrieval-2.0"
 version = "0.1.0"
 description = "IR recipe retrieval from ingredients"
 authors = ["Jess Godes, Linda Ding, Yi Luo, Chuyun Kuang"]
