@@ -1,0 +1,152 @@
+<!-- simplified front-end code for receiving input and displaying results -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Recipe Generator</title>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This will center the children elements */
+    justify-content: start; /* This will align the children to the start of the main axis */
+    background-image: url('../static/plot/bg.png');
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: contain;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.8); 
+    z-index: -1;
+}
+
+.input-group, #speechToText {
+    width: 300px; /* Make these elements take the full width */
+    box-sizing: border-box; /* Make sure padding and borders are included in the width */
+    margin-bottom: 20px; /* Add some space between the elements */
+    text-align: center; /* Center text for inputs and buttons */
+}
+
+input[type="text"] {
+    width: 300px; /* Auto width based on content */
+    display: block; /* Make these elements block to take full width */
+    margin: 0 auto 10px; /* Centers the block elements horizontally and adds spacing */
+}
+
+button, #start-btn {
+    width: 100px; /* Auto width based on content */
+    display: block; /* Make these elements block to take full width */
+    margin: 0 auto 10px; /* Centers the block elements horizontally and adds spacing */
+}
+
+#recipeOutput {
+    min-height: 400px; /* Adjust the value as needed */
+    border: 1px solid #cccccc; /* A light border to show the area */
+    width: 500px; /* Or any other width you prefer */
+    margin: 20px auto; /* Top and bottom margin with auto horizontally centers the div */
+    background-color: #f9f9f9; /* A light background color to indicate the area */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow to indicate depth */
+    padding: 20px; /* Add some padding inside */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+    display: block; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: start; /* Align the children to the start of the main axis */
+    align-items: center; /* Center-align children horizontally */
+    text-align: center; /* Center text for any content that will be added */
+}
+
+#recipeOutput h2 {
+    color: #575757; /* Title text color */
+    font-size: 1.4em; /* Title font size */
+    margin-top: 0;
+    padding-top: 0px; /* Space at the top inside the border */
+}
+#recipeOutput p {
+    color: #a3a3a3; /* Paragraph text color */
+    font-size: 0.82em; /* Paragraph font size */
+    margin-top: 0;
+    padding: 0px 5px; /* Padding inside the border */
+
+}
+
+h1 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+</style>
+</head>
+<body>
+    <h1>Recipe Generator</h1>
+
+    <div class="input-group">
+        <div>
+            <input type="text" id="includeIngredients" placeholder="Ingredients that you have separated by commas" style="margin-bottom: 10px;">
+        </div>
+        <div>
+            <input type="text" id="excludeIngredients" placeholder="Ingredients that you don't like, separated by commas" style="margin-bottom: 10px;">
+        </div>
+        <button onclick="submitIngredients()">Submit Ingredients</button>
+    </div>
+
+    <div id="loading" style="display: none;">Loading...</div>
+
+    <div class="centered-group">
+        <input type="text" id="speechToText" placeholder="click the button to start voice input" style="margin-bottom: 10px;">
+        <button id="start-btn">Start voice input</button>
+    </div>
+    <div id="loading" style="display: none;">Loading...</div>
+
+    <script>
+    // 检查浏览器是否支持Web Speech API
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+        console.log('Your Browser supports speech Recognition');
+
+        var recognition = new SpeechRecognition();
+        var textBox = document.getElementById('speechToText');
+        var startButton = document.getElementById('start-btn');
+
+        // Click the button to start voice recognition
+        startButton.addEventListener('click', function() {
+            recognition.start();
+        });
+
+        recognition.addEventListener('result', function(event) {
+            var text = event.results[0][0].transcript;
+            textBox.value = text;
+            // Send audio data to the server
+            submit_voice(text);
+        });
+
+        // Restart after recognition (optional)
+        recognition.addEventListener('end', function() {
+            recognition.start();
+        });
+
+    } else {
+        console.log('Your Browser does not support Speech Recognition');
+    }
+    </script>
+
+    <div id="recipeOutput">
+        <!-- Title for the recipe output area -->
+        <h2>Recipe Results</h2>
+        <!-- Placeholder text -->
+        <p>Results will appear here after submitting ingredients.</p>
+
+    </div>
+    <script src="/static/js/script.js"></script>
+
+</body>
+</html>
