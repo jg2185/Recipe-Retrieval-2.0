@@ -16,6 +16,18 @@ def setup_logging():
                             logging.StreamHandler()
                         ])
     logging.info("Logging setup complete - outputting to both console and logs.txt")
+    
+import gdown
+import os
+
+os.makedirs(os.path.dirname('../data/readable_recipes.txt'), exist_ok=True)
+
+# download the data from google drive
+gdown.download('https://drive.google.com/file/d/1RIxIp1oN-s37NZ4a45-teL4gvUnAxtkp/view?usp=sharing', '../data/readable_recipes.txt', quiet=False)
+
+
+with open('../data/readable_recipes.txt', 'r') as file:
+    content = file.read()
 
 
 app = Flask(__name__)
@@ -73,6 +85,12 @@ def process_audio():
             'message': 'Audio file not found or not provided'
         }
     return jsonify(response)
+
+#delete it after use
+
+os.remove('../data/readable_recipes.txt')
+print(f"File {'../data/readable_recipes.txt'} has been deleted.")
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
