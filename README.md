@@ -82,6 +82,4 @@ By default, the project assumes the following directory structure:
     ¦   +-- plot                            # background plot of the website
 
 
-[Workflow](DSAN5400_project.pdf)
-
-![alt text](DSAN5400_project.png)
+![workflow](DSAN5400_project.png)
