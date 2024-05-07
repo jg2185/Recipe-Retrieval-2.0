@@ -4,6 +4,19 @@ from speech_processing import SpeechProcessor
 from utils.recipe_searcher import RecipeSearcher
 import os
 import argparse
+import logging
+
+#logging part
+def setup_logging():
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s',
+                        datefmt='%m/%d/%Y %I:%M:%S %p',
+                        handlers=[
+                            logging.FileHandler("./logs.txt"),
+                            logging.StreamHandler()
+                        ])
+    logging.info("Logging setup complete - outputting to both console and logs.txt")
+
 
 app = Flask(__name__)
 text_processor = TextProcessor()
