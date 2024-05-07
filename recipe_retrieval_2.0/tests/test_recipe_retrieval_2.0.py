@@ -2,6 +2,8 @@ import pytest
 from unittest.mock import MagicMock, patch
 
 from utils.recipe_searcher import RecipeSearcher
+from src.recipe_retrieval_2.utils import preprocess
+
 
 def test_load_index():
     with patch("builtins.open", new_callable=pytest.mock.mock_open, read_data='{"ingredient": ["1", "2"]}'):
@@ -32,6 +34,20 @@ def test_remove_duplicate_paragraphs():
     text = "Line1\nLine2\nLine1\nLine3"
     searcher = RecipeSearcher("inverted_index.json")
     assert searcher.remove_duplicate_paragraphs(text) == "Line1\nLine2\nLine3"
+
+lobster_text = "{'title': 'Maine Lobster Rolls', 'ingredients': ['4 top--sliced hot-dog buns (or fashion your own top-sliced buns from bread)', '2 tablespoons unsalted butter, softened', '2 cups coarsely chopped cooked lobster (from about (3) 11/4 pound lobsters, cool but not cold', '4 tablespoons melted butter or 3 tablespoons mayonnaise mixed with 2 tablespoons minced celery'], 'instructions': 'If using top-sliced buns, spread softened butter on outsides; if using hamburger buns, butter insides. Heat a griddle or heavy skillet over moderately high heat until hot and toast buns, buttered sides only, until light brown. Divide lobster meat among buns and either drizzle melted butter over lobster or dollop with mayonnaise mixture.;'}"
+
+def test_readable():
+    readable_text = preprocess.FormatJson.readable("test_data.json")
+    readable_lobster = readable_text[0]
+    assert lobster_text == readable_lobster
+
+lobster_ingredients = ['top hot-dog bun fashion own top-slic bun bread', 'unsalt butter', 'lobster lobster cool', 'butter mix celeri']
+
+def test_preprocess():
+    all_ingredients = preprocess.GetIngredients.get_ingredients("test_data.json")
+    test_ingredients = all_ingredients[0]
+    assert lobster_ingredients == test_ingredients
 
 #pytest tests/test_recipe_searcher.py
 # use the command above within terminal to run pytest
