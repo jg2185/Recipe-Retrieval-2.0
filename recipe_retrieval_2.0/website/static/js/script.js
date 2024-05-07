@@ -50,6 +50,7 @@ function submitIngredients() {
     })
     .then(data => {
         // 隐藏加载状态
+        console.log(data)
         document.getElementById('loading').style.display = 'none';
         displayRecipes(data);
     })
@@ -74,16 +75,24 @@ function displayRecipes(recipes) {
     recipeOutput.innerHTML = '';
 
     // 迭代所有食谱，并为每个食谱创建HTML内容
-    recipes.forEach((recipe) => {
-        recipeOutput.innerHTML += `
-            <div class="recipe">
-                <h1>${recipe.title}</h1>
-                <h2>成分</h2>
-                <ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
-                <h2>做法</h2>
-                <ol>${recipe.instructions.map(step => `<li>${step}</li>`).join('')}</ol>
-            </div>
+    // recipes.forEach((recipe) => {
+    //     recipeOutput.innerHTML += `
+    //         <div class="recipe">
+    //             <h1>${recipe.title}</h1>
+    //             <h2>成分</h2>
+    //             <ul>${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+    //             <h2>做法</h2>
+    //             <ol>${recipe.instructions.map(step => `<li>${step}</li>`).join('')}</ol>
+    //         </div>
+    //     `;
+    // });
+    recipes.forEach(recipe => {
+        const recipeElement = document.createElement('div');
+        recipeElement.innerHTML = `
+            <h3>${recipe.title}</h3>
+            <p>${recipe.description}</p>
         `;
+        output.appendChild(recipeElement);
     });
 }
 

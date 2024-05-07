@@ -12,7 +12,7 @@
     flex-direction: column;
     align-items: center; /* This will center the children elements */
     justify-content: start; /* This will align the children to the start of the main axis */
-    background-image: url('plot/bg.png');
+    background-image: url('../static/plot/bg.png');
     background-attachment: fixed;
     background-position: center center;
     background-size: contain;
@@ -97,19 +97,15 @@ h1 {
         </div>
         <button onclick="submitIngredients()">Submit Ingredients</button>
     </div>
-    
-    
 
-    <!-- <div class="input-group">
-        <input type="text" id="textInput" placeholder="Ingredients separated by commas">
-        <button onclick="submitText()">Submit Ingredients</button>
-    </div> -->
+    <div id="loading" style="display: none;">Loading...</div>
 
-    <div class="centered-group">
+    <!-- <div class="centered-group">
         <input type="text" id="speechToText" placeholder="click the button to start voice input" style="margin-bottom: 10px;">
         <button id="start-btn">Start voice input</button>
     </div>
-    
+    <div id="loading" style="display: none;">Loading...</div>
+
     <script>
     // 检查浏览器是否支持Web Speech API
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -155,8 +151,8 @@ h1 {
     } else {
         console.log('Your Browser does not support Speech Recognition');
     }
-    </script>
-    
+    </script> -->
+
     <div id="recipeOutput">
         <!-- Title for the recipe output area -->
         <h2>Recipe Results</h2>
@@ -164,6 +160,7 @@ h1 {
         <p>Results will appear here after submitting ingredients.</p>
 
     </div>
-    <script src="script.js"></script>
+    <script src="/static/js/script.js"></script>
+
 </body>
 </html>

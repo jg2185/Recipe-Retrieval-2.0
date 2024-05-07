@@ -14,7 +14,7 @@ Here's a usage guide for Recipe Generator website:
 
 ### Accessing the Website
 
-* Open the website ![website](website/receive.html) by navigating to the `receive.html` page in your browser.
+* Open the website ![website](website/templates/receive.html) by navigating to the `receive.html` page in your browser.
 
 ### Using the Recipe Generator
 
