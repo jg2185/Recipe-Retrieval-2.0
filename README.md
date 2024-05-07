@@ -84,4 +84,4 @@ By default, the project assumes the following directory structure:
 
 [Workflow](DSAN5400_project.pdf)
 
-[Workflow](DSAN5400_project.drawio)
+![alt text](DSAN5400_project.png)
