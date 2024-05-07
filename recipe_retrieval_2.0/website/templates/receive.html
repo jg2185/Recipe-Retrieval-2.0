@@ -51,7 +51,7 @@ button, #start-btn {
 #recipeOutput {
     min-height: 400px; /* Adjust the value as needed */
     border: 1px solid #cccccc; /* A light border to show the area */
-    width: 300px; /* Or any other width you prefer */
+    width: 500px; /* Or any other width you prefer */
     margin: 20px auto; /* Top and bottom margin with auto horizontally centers the div */
     background-color: #f9f9f9; /* A light background color to indicate the area */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow to indicate depth */
@@ -100,7 +100,7 @@ h1 {
 
     <div id="loading" style="display: none;">Loading...</div>
 
-    <!-- <div class="centered-group">
+    <div class="centered-group">
         <input type="text" id="speechToText" placeholder="click the button to start voice input" style="margin-bottom: 10px;">
         <button id="start-btn">Start voice input</button>
     </div>
@@ -117,41 +117,27 @@ h1 {
         var textBox = document.getElementById('speechToText');
         var startButton = document.getElementById('start-btn');
 
-        // 点击按钮开始语音识别
+        // Click the button to start voice recognition
         startButton.addEventListener('click', function() {
-        recognition.start();
+            recognition.start();
         });
 
-        // 识别结果事件
         recognition.addEventListener('result', function(event) {
-        var text = event.results[0][0].transcript;
-        textBox.value = text;
-        // 发送文本到服务器
-        fetch('/submit_voice', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({text: text})
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-        })
-        .catch(error => {
-            console.error('Error:', error);
+            var text = event.results[0][0].transcript;
+            textBox.value = text;
+            // Send audio data to the server
+            submit_voice(text);
         });
-    });
 
-        // 识别结束后重新开始（可选）
+        // Restart after recognition (optional)
         recognition.addEventListener('end', function() {
-        recognition.start();
+            recognition.start();
         });
 
     } else {
         console.log('Your Browser does not support Speech Recognition');
     }
-    </script> -->
+    </script>
 
     <div id="recipeOutput">
         <!-- Title for the recipe output area -->

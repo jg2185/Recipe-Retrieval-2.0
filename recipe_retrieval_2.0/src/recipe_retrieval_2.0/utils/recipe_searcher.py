@@ -20,7 +20,7 @@ class RecipeSearcher:
 
     def load_recipes(self):
         # load original recipes data
-        with open("../data/readable_recipes.txt", 'r') as file:
+        with open("data/readable_recipes.txt", 'r') as file:
             return json.load(file)
 
     def get_user_input(self):
