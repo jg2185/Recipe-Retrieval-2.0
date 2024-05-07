@@ -1,5 +1,0 @@
-spacy==3.0
-torch==1.7.1
-torchaudio==0.7.2
-transformers==4.5.1
-langdetect==1.0.9
