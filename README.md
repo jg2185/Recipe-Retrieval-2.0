@@ -81,5 +81,7 @@ By default, the project assumes the following directory structure:
     ¦   +-- script.js                       # Useful for connecting website and codes 
     ¦   +-- plot                            # background plot of the website
 
+## Project Workflow
+To better understand the structure of the project, please check the flollowing program architecture.
 
 ![workflow](DSAN5400_project.png)
