@@ -1,5 +1,10 @@
 {
     "salt": ["recipe1", "recipe5"],
     "pepper": ["recipe2", "recipe5"],
-    "olive oil": ["recipe1", "recipe3", "recipe4"]
+    "olive oil": ["recipe1", "recipe3", "recipe4"],
+    "beans": ["recipe5", "recipe4"],
+    "bacon": ["recipe5", "recipe6"],
+    "orange": ["recipe7"],
+    "apple": ["recipe7", "recipe6"],
+    "cinnamon": ["recipe6", "recipe7"]
 }
