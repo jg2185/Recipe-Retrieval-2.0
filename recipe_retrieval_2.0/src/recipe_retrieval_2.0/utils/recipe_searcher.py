@@ -103,6 +103,7 @@ class RecipeSearcher:
         # sort recipes by the number of matching ingredients (descending) and limit to top 3
         sorted_recipe_ids = sorted(recipe_matches, key=recipe_matches.get, reverse=True)[:3]
 
+        recipes_data = []
         if not sorted_recipe_ids:
             print("No recipes found with the given ingredients that avoid your dislikes. Generating some suggestions for you:")
             # generate a recipe prompt based on user ingredients
@@ -110,15 +111,24 @@ class RecipeSearcher:
             generated_recipe = self.generate_recipe(prompt)
             #some duplications with generated recipe
             #clean_recipe = self.remove_duplicates_generation(generated_recipe)  
-            print(generated_recipe)
+            # print(generated_recipe)
+            return [generated_recipe]
         else:
             for recipe_id in sorted_recipe_ids:
                 recipe = self.recipes[recipe_id]
-                print(f"\nRecipe: {recipe['title']}")
-                print("Ingredients:")
+                # print(f"\nRecipe: {recipe['title']}")
+                # print("Ingredients:")
                 clean_ingredients = self.remove_duplicates(recipe['ingredients'])  
-                print("\n".join(clean_ingredients))
-                print("Instructions:")
+                # print("\n".join(clean_ingredients))
+                # print("Instructions:")
                 clean_instructions = self.remove_duplicate_paragraphs(recipe['instructions'])  
-                print(clean_instructions) 
+                # print(clean_instructions) 
+                recipes_data.append({
+                'title': recipe['title'],
+                'ingredients': clean_ingredients,
+                'instructions': clean_instructions
+            })
+        return recipes_data
+
+
 
