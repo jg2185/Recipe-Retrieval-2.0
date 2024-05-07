@@ -97,7 +97,7 @@ h1 {
         </div>
         <button onclick="submitIngredients()">Submit Ingredients</button>
     </div>
-    
+    <div id="loading" style="display: none;">Loading...</div>
     
 
     <!-- <div class="input-group">
@@ -121,35 +121,21 @@ h1 {
         var textBox = document.getElementById('speechToText');
         var startButton = document.getElementById('start-btn');
 
-        // 点击按钮开始语音识别
+        // Click the button to start voice recognition
         startButton.addEventListener('click', function() {
-        recognition.start();
+            recognition.start();
         });
 
-        // 识别结果事件
         recognition.addEventListener('result', function(event) {
-        var text = event.results[0][0].transcript;
-        textBox.value = text;
-        // 发送文本到服务器
-        fetch('/submit_voice', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({text: text})
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-        })
-        .catch(error => {
-            console.error('Error:', error);
+            var text = event.results[0][0].transcript;
+            textBox.value = text;
+            // Send audio data to the server
+            submit_voice(text);
         });
-    });
 
-        // 识别结束后重新开始（可选）
+        // Restart after recognition (optional)
         recognition.addEventListener('end', function() {
-        recognition.start();
+            recognition.start();
         });
 
     } else {
