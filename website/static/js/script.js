@@ -70,20 +70,31 @@ function displayRecipes(recipes) {
     const recipeOutput = document.getElementById('recipeOutput');
     recipeOutput.innerHTML = '';
 
-    // Iterate over all the recipes and create HTML content for each recipe
-    recipes.forEach(recipe => {
-        const ingredientsHtml = recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('');
-        const instructionsHtml = recipe.instructions.split('\n').map(step => `<li>${step}</li>`).join('');
-
+    // Check if recipes is a string (single recipe in text form)
+    if (typeof recipes === 'string') {
         recipeOutput.innerHTML += `
             <div class="recipe">
-                <h2>${recipe.title}</h2>
-                <h2>Ingredients:</h2>
-                <ul>${ingredientsHtml}</ul>
-                <h2>Instructions:</h2>
-                <ol>${instructionsHtml}</ol>
+                ${recipes}$
             </div>
         `;
-    });
+    } else if (Array.isArray(recipes)) {
+        // Handle an array of recipe objects
+        recipes.forEach(recipe => {
+            const ingredientsHtml = recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('');
+            const instructionsHtml = recipe.instructions.split('\n').map(step => `<li>${step}</li>`).join('');
+
+            recipeOutput.innerHTML += `
+                <div class="recipe">
+                    <h2>${recipe.title}</h2>
+                    <h2>Ingredients:</h2>
+                    <ul>${ingredientsHtml}</ul>
+                    <h2>Instructions:</h2>
+                    <ol>${instructionsHtml}</ol>
+                </div>
+            `;
+        });
+    }
 }
+
+
 
