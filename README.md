@@ -57,10 +57,10 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 ## Project Structure
 By default, the project assumes the following directory structure:
 
-    +-- data                                # Files collected from https://eightportions.com/datasets/Recipes/
-    ¦   +-- recipes_raw_nosource_ar         # Recipe collected from http://allrecipes.com/
-    ¦   +-- recipes_raw_nosource_epi        # Recipe collected from http://www.epicurious.com/
-    ¦   +-- recipes_raw_nosource_fn         # Recipe collected from http://www.foodnetwork.com/
+    +-- data                                # The dataset includes filtered data comprising ingredients and their corresponding recipe IDs
+    ¦   +-- ingredient.txt                  # cleaned, preprocessed ingredients for each recipe to iterate through
+    ¦   +-- ingredient_index.json           # inverted index used to search for ingredient matches
+    ¦   +-- inverted_index.py               # code to create the inverted index from the ingredients.txt file
     ¦
     ¦
     +-- Input_Processing                
