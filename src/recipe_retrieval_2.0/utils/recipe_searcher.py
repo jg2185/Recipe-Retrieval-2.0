@@ -23,25 +23,25 @@ class RecipeSearcher:
         with open("../data/readable_recipes.txt", 'r') as file:
             return json.load(file)
 
-    def get_user_input(self):
+    def get_user_input(self, ingr):
         # let the user input ingredients and return a cleaned list of stemmed,lower case ingredients
         # can handle user input with common and white space such as following examples
         #1 tablespoon extra-virgin olive oil
         #1 tablespoon extra-virgin olive oil,
         #1 tablespoon extra-virgin olive oil ,
-        user_input = input("Enter ingredients separated by commas (e.g., salt, butter): ")
-        ingredients = [ingredient.strip().lower() for ingredient in user_input.split(',') if ingredient.strip()]
+        # user_input = input("Enter ingredients separated by commas (e.g., salt, butter): ")
+        ingredients = [ingredient.strip().lower() for ingredient in ingr.split(',') if ingredient.strip()]
         stemmed_ingredients = [self.stemmer.stem(ingredient) for ingredient in ingredients]
         return stemmed_ingredients
 
 
-    def get_user_dislikes(self):
+    def get_user_dislikes(self, dis):
         # ask the user for ingredients they are allergic to or don't like to eat
-        user_input = input("Enter any ingredients you are allergic to or dislike, separated by commas (e.g., nuts, gluten): ")
+        # user_input = input("Enter any ingredients you are allergic to or dislike, separated by commas (e.g., nuts, gluten): ")
         # if the user does not have allergy or dislike, enter NONE, NA,N/A,none,na,n/a to skip
-        if user_input.lower() in ['none', 'na', 'n/a', '']:
+        if dis.lower() in ['none', 'na', 'n/a', '']:
             return []
-        dislikes = [dislike.strip().lower() for dislike in user_input.split(',') if dislike.strip()]
+        dislikes = [dislike.strip().lower() for dislike in dis.split(',') if dislike.strip()]
         stemmed_dislikes = [self.stemmer.stem(dislike) for dislike in dislikes]
         return stemmed_dislikes
     
@@ -110,9 +110,9 @@ class RecipeSearcher:
             prompt = f"Recipe with ingredients: {', '.join(ingredients)}:"
             generated_recipe = self.generate_recipe(prompt)
             #some duplications with generated recipe
-            #clean_recipe = self.remove_duplicates_generation(generated_recipe)  
+            clean_recipe = self.remove_duplicates_generation(generated_recipe)  
             # print(generated_recipe)
-            return [generated_recipe]
+            return clean_recipe
         else:
             for recipe_id in sorted_recipe_ids:
                 recipe = self.recipes[recipe_id]
