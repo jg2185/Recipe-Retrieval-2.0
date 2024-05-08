@@ -5,7 +5,7 @@ IR recipe retrieval from ingredients
 ## Installation
 
 ```bash
-$ pip install recipe_retrieval_2.0
+$ pip install git+https://github.com/jg2185/Recipe-Retrieval-2.0.git
 ```
 ## Contributor
 
