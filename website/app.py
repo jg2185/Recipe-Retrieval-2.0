@@ -6,7 +6,7 @@ import os
 sys.path.insert(0, os.path.abspath('../'))
 # from Input_Processing.text_processing import TextProcessor
 # from Input_Processing.speech_processing import SpeechProcessor
-sys.path.insert(0, os.path.abspath('../src/recipe_retrieval_2.0/'))
+sys.path.insert(0, os.path.abspath('/Users/kuangchuyun/Desktop/GU/ds5400/project/Recipe-Retrieval-2.0/recipe_retrieval_2.0/src/recipe_retrieval_2.0/'))
 from utils.recipe_searcher import RecipeSearcher
 import os
 app = Flask(__name__)
@@ -43,7 +43,9 @@ def process_text():
         # include = text_processor.process_text(include_ingredients)
         # exclude = text_processor.process_text(exclude_ingredients)
         # recipes = searcher.display_recipes(include, exclude)
-        recipes = searcher.display_recipes(include_ingredients, exclude_ingredients)
+        ingre = searcher.get_user_input(include_ingredients)
+        dis = searcher.get_user_dislikes(exclude_ingredients)
+        recipes = searcher.display_recipes(ingre, dis)
         return jsonify({
             'status': 'success',
             'data': recipes
