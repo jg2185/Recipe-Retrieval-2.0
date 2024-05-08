@@ -13,7 +13,7 @@ class FormatJson:
 
     def readable(self, path):
         """
-            path is a path to a json file (probably via argparse)
+            path is a path to a json file
         """
         f = open(path,)
         file = json.load(f)
@@ -43,7 +43,7 @@ class GetIngredients:
 
     def get_ingredients(self, path, stop_words):
         """
-        path is a path to a json file (probably through argparse)
+        path is a path to a json file
         stop_words is a list of words we don't want in final ingredients list
         """
         f = open(path, )
