@@ -34,7 +34,14 @@ dependencies:
   - geopandas=0.14.1
   - squarify=0.4.3
   - dash=2.14.2
+  - flask-cors
   - pip:
     - rdatasets
     - wbdata
     - gapminder
+    - tensorflow
+    - torch
+    - torchvision
+    - torchaudio
+    - tf-keras
+    - transformers
