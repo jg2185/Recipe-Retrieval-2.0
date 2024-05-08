@@ -1,10 +1,6 @@
-name: dsan5400
+name: project
 channels:
   - apple
-  - conda-forge
-dependencies:
-  name: dsan5200
-channels:
   - conda-forge
 dependencies:
   - python=3.11.7
