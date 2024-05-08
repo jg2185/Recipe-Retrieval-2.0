@@ -63,7 +63,7 @@ By default, the project assumes the following directory structure:
     ¦   +-- inverted_index.py               # code to create the inverted index from the ingredients.txt file
     ¦
     ¦
-    +-- Input_Processing                
+    +-- input_processing                
     ¦   +-- main_input_processing.py        # Useful for processing input data transferd from website
     ¦   +-- text_processing.py              # Useful for processing text data
     ¦   +-- speech_processing.py            # Useful for processing audio data
@@ -84,9 +84,12 @@ By default, the project assumes the following directory structure:
     ¦
     ¦
     +-- website
-    ¦   +-- receive.html                    # Useful for displaying Recipe Generator 
-    ¦   +-- script.js                       # Useful for connecting website and codes 
-    ¦   +-- plot                            # background plot of the website
+    ¦   +-- static                         # Useful for storing js file and picture
+    ¦   ¦	  +-- script.js 		             # Useful for connecting website and codes 
+    ¦   ¦   +-- plot                       # background plot of the website 
+    ¦   +-- template                       # Useful for storing html file
+    ¦   ¦   +-- receive.html               # Useful for displaying Recipe Generator 
+    ¦   +-- app.py      	                 # Useful for connecting python code and html
 
 ## Project Workflow
 To better understand the structure of the project, please check the following program architecture.
