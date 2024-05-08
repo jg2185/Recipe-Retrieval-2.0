@@ -17,7 +17,7 @@ Here's a usage guide for Recipe Generator website:
 
 ### Accessing the Website
 
-* Open the website ![website](website/receive.html) by navigating to the `receive.html` page in your browser.
+* Open the website by running `python website/app.py', followed by running `http://127.0.0.1:5000` in your local website. 
 
 ### Using the Recipe Generator
 
