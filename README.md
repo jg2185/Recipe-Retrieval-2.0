@@ -12,7 +12,7 @@ $ pip install git+https://github.com/jg2185/Recipe-Retrieval-2.0.git
 Alternative way to use this package is to pull it from this repo to your local device.
 
 To download the necessary data for this package:
-![link](https://drive.google.com/drive/folders/1ZRHldNCmdHYx_oCri1YJzakTDLacEa1h?usp=sharing)
+[link](https://drive.google.com/drive/folders/1ZRHldNCmdHYx_oCri1YJzakTDLacEa1h?usp=sharing)
 
 ## Contributor
 
@@ -88,7 +88,7 @@ By default, the project assumes the following directory structure:
     ¦
     +-- website
     ¦   +-- static                         # Useful for storing js file and picture
-    ¦   ¦	  +-- script.js 		             # Useful for connecting website and codes 
+    ¦   ¦   +-- script.js 		             # Useful for connecting website and codes 
     ¦   ¦   +-- plot                       # background plot of the website 
     ¦   +-- template                       # Useful for storing html file
     ¦   ¦   +-- receive.html               # Useful for displaying Recipe Generator 
