@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+#from flask import Flask, request, jsonify
 #from text_processing import TextProcessor
 #from speech_processing import SpeechProcessor
 from utils.recipe_searcher import RecipeSearcher
@@ -6,7 +6,6 @@ import os
 import argparse
 import logging
 import gdown
-import os
 
 #logging part
 def setup_logging():
@@ -84,9 +83,18 @@ with open('../data/readable_recipes.txt', 'r') as file:
 #        }
 #    return jsonify(response)
 
+#### this part involves using english text as input to generate IR 
+if __name__ == "__main__":
+    # parser = argparse.ArgumentParser(description="recipe retrieval")
+    # parser.add_argument("-f", "--file", required=True, help="path to inverted index- json file")
+    # args = parser.parse_args()
+    #path for the saved inverted index
+    searcher = RecipeSearcher("../data/inverted_index.json")
+    ingredients = searcher.get_user_input()
+    dislikes = searcher.get_user_dislikes()
+    searcher.display_recipes(ingredients, dislikes)
 
 #delete the data after use
-
 os.remove('../data/readable_recipes.txt')
 print(f"File {'../data/readable_recipes.txt'} has been deleted.")
 
