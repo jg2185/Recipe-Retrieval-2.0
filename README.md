@@ -1,4 +1,4 @@
-# recipe_retrieval
+# Recipe Retrieval
 
 IR recipe retrieval from ingredients
 
