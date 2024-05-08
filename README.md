@@ -11,6 +11,9 @@ $ pip install git+https://github.com/jg2185/Recipe-Retrieval-2.0.git
 ```
 Alternative way to use this package is to pull it from this repo to your local device.
 
+To download the necessary data for this package:
+![link](https://drive.google.com/drive/folders/1ZRHldNCmdHYx_oCri1YJzakTDLacEa1h?usp=sharing)
+
 ## Contributor
 
 `recipe_retrieval_2.0` was created by Jess Godes, Linda Ding, Yi Luo, Chuyun Kuang.
