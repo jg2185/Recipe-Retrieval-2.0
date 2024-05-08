@@ -3,10 +3,10 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import sys
 import os
-sys.path.insert(0, os.path.abspath('../'))
+# sys.path.insert(0, os.path.abspath('../'))
 # from Input_Processing.text_processing import TextProcessor
 # from Input_Processing.speech_processing import SpeechProcessor
-sys.path.insert(0, os.path.abspath('/Users/kuangchuyun/Desktop/GU/ds5400/project/Recipe-Retrieval-2.0/recipe_retrieval_2.0/src/recipe_retrieval_2.0/'))
+sys.path.insert(0, os.path.abspath('../src/recipe_retrieval_2.0/'))
 from utils.recipe_searcher import RecipeSearcher
 import os
 app = Flask(__name__)
@@ -16,7 +16,7 @@ CORS(app)
 
 # Create a RecipeSearcher instance
 # print('2')
-searcher = RecipeSearcher("/Users/kuangchuyun/Desktop/GU/ds5400/project/Recipe-Retrieval-2.0/recipe_retrieval_2.0/data/inverted_index.json")
+searcher = RecipeSearcher("../data/inverted_index.json")
 # print('1')
 @app.route('/')
 def home():
