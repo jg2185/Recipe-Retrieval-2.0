@@ -14,6 +14,8 @@ Alternative way to use this package is to pull it from this repo to your local d
 To download the necessary data for this package:
 [link](https://drive.google.com/drive/folders/1ZRHldNCmdHYx_oCri1YJzakTDLacEa1h?usp=sharing)
 
+Please ensure that you download the file readable_recipes.txt and place it in the 'data' folder to properly utilize the package.
+
 ## Contributor
 
 `recipe_retrieval_2.0` was created by Jess Godes, Linda Ding, Yi Luo, Chuyun Kuang.
