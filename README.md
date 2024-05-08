@@ -44,7 +44,7 @@ Here's a usage guide for Recipe Generator website:
 * After submitting your ingredients, scroll down to the "Recipe Results" section to view the suggested recipes that match your input criteria. This section will display recipes using the ingredients you have and avoiding those you dislike.
 
 ### Input Processing
-* If you want to try the multilingual and audio parts additionally, simply run "python main_input_processing.py directly" in the terminal.
+* If you want to try the multilingual and audio parts additionally, simply run `python main_input_processing.py` directly in the terminal.
 
 ### Tips for Optimal Use
 * Ensure all ingredients are spelled correctly to improve recipe matching accuracy.
